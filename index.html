@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExamPro | Online Examination System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="auth-screen" id="authScreen">
+        <div class="auth-card">
+            <p class="eyebrow">Access portal</p>
+            <h2>Login to Examination Portal</h2>
+
+            <div class="auth-toggle">
+                <button class="toggle-btn active" id="studentLoginTab" type="button">Student Login</button>
+                <button class="toggle-btn" id="adminLoginTab" type="button">Admin Login</button>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="input-group">
+                    <label for="studentNameInput">Student Name</label>
+                    <input id="studentNameInput" name="studentName" type="text" placeholder="Enter full name"
+                        required />
+                </div>
+
+                <div class="input-group">
+                    <label for="collegeNameInput">College Name</label>
+                    <input id="collegeNameInput" name="collegeName" type="text" placeholder="Enter college name"
+                        required />
+                </div>
+
+                <div class="input-group">
+                    <label for="branchInput">Branch</label>
+                    <input id="branchInput" name="branch" type="text" placeholder="Enter branch" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="hallTicketInput">Hall Ticket Number</label>
+                    <input id="hallTicketInput" name="hallTicket" type="text" placeholder="Enter hall ticket number"
+                        required />
+                </div>
+
+                <div class="input-group">
+                    <label for="studentPasswordInput">Student Password</label>
+                    <div class="password-input-wrap">
+                        <input id="studentPasswordInput" name="studentPassword" type="password"
+                            placeholder="Enter student password" required />
+                        <button type="button" class="toggle-password-btn"
+                            data-target="studentPasswordInput">Show</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block" type="submit">Login as Student</button>
+            </form>
+
+            <form id="adminLoginForm" class="login-form hidden">
+                <div class="input-group">
+                    <label for="adminUsernameInput">Saved Admin Username</label>
+                    <input id="adminUsernameInput" name="adminUsername" type="text"
+                        placeholder="Enter saved admin username" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="adminPasswordInput">Admin Password</label>
+                    <div class="password-input-wrap">
+                        <input id="adminPasswordInput" name="adminPassword" type="password"
+                            placeholder="Enter admin password" required />
+                        <button type="button" class="toggle-password-btn" data-target="adminPasswordInput">Show</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block" type="submit">Login as Admin</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-shell hidden" id="appShell">
+        <header class="topbar">
+            <div class="brand-wrap">
+                <div class="brand-mark">E</div>
+                <div>
+                    <p class="eyebrow">Assessment portal</p>
+                    <h1>ExamPro</h1>
+                </div>
+            </div>
+
+            <nav class="topnav" aria-label="Main navigation">
+                <button class="nav-link active" type="button">Dashboard</button>
+                <button class="nav-link" type="button">Exams</button>
+                <button class="nav-link" type="button">Results</button>
+            </nav>
+
+            <div class="user-panel">
+                <button class="theme-toggle" id="themeToggleBtn" type="button" aria-label="Toggle color theme">
+                    <span id="themeToggleIcon">☾</span>
+                    <span id="themeToggleText">Dark</span>
+                </button>
+                <div class="status-pill online">Online</div>
+                <div class="user-chip">
+                    <div class="avatar" id="profileInitials">AK</div>
+                    <div>
+                        <small>Hello</small>
+                        <strong id="studentName">Aisha Khan</strong>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <section class="main-column">
+                <div class="welcome-card">
+                    <div>
+                        <p class="eyebrow">Welcome back</p>
+                        <h2>Ready for your next assessment?</h2>
+                    </div>
+                    <button class="btn btn-primary" id="startExamBtn" type="button">Start Exam</button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card accent-blue">
+                        <span>Tests taken</span>
+                        <strong>12</strong>
+                        <small>+3 this month</small>
+                    </div>
+                    <div class="stat-card accent-purple">
+                        <span>Average score</span>
+                        <strong>86%</strong>
+                        <small>Excellent</small>
+                    </div>
+                    <div class="stat-card accent-green">
+                        <span>Streak</span>
+                        <strong>08 days</strong>
+                        <small>Keep it up</small>
+                    </div>
+                    <div class="stat-card accent-gold">
+                        <span>Next exam</span>
+                        <strong>Today</strong>
+                        <small>2:00 PM</small>
+                    </div>
+                </div>
+
+                <div class="subject-panel">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Choose your test</p>
+                            <h3>Available assessments</h3>
+                        </div>
+                    </div>
+
+                    <div class="subject-grid" id="subjectGrid"></div>
+                </div>
+            </section>
+
+            <aside class="side-column">
+                <div class="panel profile-panel">
+                    <div class="panel-head">
+                        <p class="panel-label">Student profile</p>
+                    </div>
+                    <div class="profile-body">
+                        <div class="avatar large" id="profileAvatarLarge">AK</div>
+                        <div>
+                            <h4 id="profileStudentName">Aisha Khan</h4>
+                            <p id="profileHallTicket">Hall Ticket: HT-2048</p>
+                        </div>
+                    </div>
+                    <div class="profile-meta">
+                        <div>
+                            <span>College</span>
+                            <strong id="profileCollege">Computer Science</strong>
+                        </div>
+                        <div>
+                            <span>Branch</span>
+                            <strong id="profileBranch">CSE</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel student-password-panel">
+                    <p class="panel-label">Account security</p>
+                    <h3>Change Password</h3>
+                    <form id="studentPasswordForm" class="admin-form">
+                        <div class="input-group">
+                            <label for="studentOldPassword">Old Password</label>
+                            <div class="password-input-wrap">
+                                <input id="studentOldPassword" type="password" placeholder="Enter old password"
+                                    autocomplete="current-password" required />
+                                <button type="button" class="toggle-password-btn"
+                                    data-target="studentOldPassword">Show</button>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="studentNewPassword">New Password</label>
+                            <div class="password-input-wrap">
+                                <input id="studentNewPassword" type="password" placeholder="Enter new password"
+                                    autocomplete="new-password" required />
+                                <button type="button" class="toggle-password-btn"
+                                    data-target="studentNewPassword">Show</button>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="studentConfirmPassword">Confirm New Password</label>
+                            <div class="password-input-wrap">
+                                <input id="studentConfirmPassword" type="password" placeholder="Confirm new password"
+                                    autocomplete="new-password" required />
+                                <button type="button" class="toggle-password-btn"
+                                    data-target="studentConfirmPassword">Show</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" type="submit">Update Password</button>
+                    </form>
+                </div>
+
+                <div class="panel leaderboard-panel">
+                    <p class="panel-label">Leaderboard</p>
+                    <ul class="leaderboard-list" id="leaderboardList"></ul>
+                </div>
+
+                <div class="panel exam-overview">
+                    <p class="panel-label">Exam overview</p>
+                    <div class="overview-item">
+                        <span>Selected test</span>
+                        <strong id="selectedSubject">Web Development</strong>
+                    </div>
+                    <div class="overview-item">
+                        <span>Duration</span>
+                        <strong>15 min</strong>
+                    </div>
+                    <div class="overview-item">
+                        <span>Difficulty</span>
+                        <strong>Intermediate</strong>
+                    </div>
+                    <div class="overview-item">
+                        <span>Questions</span>
+                        <strong id="overviewQuestionCount">5</strong>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <section class="exam-panel" id="examPanel">
+            <div class="exam-header">
+                <div>
+                    <p class="eyebrow small" id="examCategory">Web Development</p>
+                    <h2>Online Examination</h2>
+                </div>
+                <div class="header-right">
+                    <span class="badge">Live Test</span>
+                    <div class="meta-box timer-box">
+                        <span>Time left</span>
+                        <strong id="timer">15:00</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exam-content">
+                <div class="question-card">
+                    <div class="question-topbar">
+                        <span class="question-number" id="questionNumber">Question 1</span>
+                        <span class="question-points" id="questionPoints">5 points</span>
+                    </div>
+
+                    <h3 id="questionText">Question text here</h3>
+                    <div class="options" id="optionsContainer"></div>
+                </div>
+
+                <aside class="summary-panel">
+                    <div class="panel exam-summary">
+                        <p class="panel-label">Exam Summary</p>
+                        <div class="summary-row">
+                            <span>Total</span>
+                            <strong id="totalQuestions">0</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Answered</span>
+                            <strong id="answeredCount">0</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Remaining</span>
+                            <strong id="remainingCount">0</strong>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-bar">
+                                <span id="progressFill"></span>
+                            </div>
+                            <small id="progressText">0% complete</small>
+                        </div>
+                    </div>
+
+                    <div class="panel nav-panel">
+                        <p class="panel-label">Question Navigator</p>
+                        <div class="nav-grid" id="questionNavigator"></div>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="action-row">
+                <button class="btn btn-secondary" id="prevBtn" type="button">Previous</button>
+                <button class="btn btn-primary" id="nextBtn" type="button">Next</button>
+                <button class="btn btn-submit" id="submitBtn" type="button">Submit Exam</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="result-modal hidden" id="resultModal" aria-live="polite">
+        <div class="result-card">
+            <div class="result-icon">✓</div>
+            <h3>Exam Submitted</h3>
+            <p id="resultMessage">Your result is ready.</p>
+            <div class="score-box">
+                <span>Score</span>
+                <strong id="finalScore">0/0</strong>
+            </div>
+            <div class="grade-box" id="gradeBox">Grade: --</div>
+            <button class="btn btn-primary" id="restartBtn" type="button">Try Again</button>
+        </div>
+    </div>
+
+    <section class="admin-dashboard hidden" id="adminDashboard">
+        <div class="admin-card">
+            <div class="admin-header">
+                <div>
+                    <p class="eyebrow">Control center</p>
+                    <h2>Admin Dashboard</h2>
+                </div>
+                <div class="admin-header-actions">
+                    <div class="admin-user-badge">
+                        <span>Admin:</span>
+                        <strong id="adminUserNameLabel">Admin</strong>
+                    </div>
+                    <button class="btn btn-secondary" id="adminLogoutBtn" type="button">Logout</button>
+                </div>
+            </div>
+
+            <div class="admin-grid">
+                <div class="admin-stat">
+                    <span>Total Students</span>
+                    <strong id="adminTotalStudents">0</strong>
+                </div>
+                <div class="admin-stat">
+                    <span>Active Exams</span>
+                    <strong id="adminActiveExams">0</strong>
+                </div>
+                <div class="admin-stat">
+                    <span>Passed</span>
+                    <strong id="adminPassedCount">0</strong>
+                </div>
+                <div class="admin-stat">
+                    <span>Pending</span>
+                    <strong id="adminPendingCount">0</strong>
+                </div>
+            </div>
+
+            <div class="admin-slide-tabs" role="tablist" aria-label="Dashboard sections">
+                <button class="admin-slide-tab active" id="adminDetailsTab" type="button" role="tab"
+                    aria-selected="true" aria-controls="adminDetailsSlide">Admin Details</button>
+                <button class="admin-slide-tab" id="studentDetailsTab" type="button" role="tab" aria-selected="false"
+                    aria-controls="studentDetailsSlide" tabindex="-1">Student Details</button>
+            </div>
+
+            <section class="admin-slide" id="adminDetailsSlide" role="tabpanel" aria-labelledby="adminDetailsTab">
+                <section class="admin-category">
+                    <div class="admin-category-heading">
+                        <p class="eyebrow small">Accounts and access</p>
+                        <h3>Admin Details</h3>
+                    </div>
+                    <div class="admin-actions">
+                        <div class="admin-panel">
+                            <h3>Admin Accounts</h3>
+                            <form id="adminProfileForm" class="admin-form">
+                                <div class="input-group">
+                                    <label for="adminDisplayName">Admin Display Name</label>
+                                    <input id="adminDisplayName" type="text" placeholder="Admin display name"
+                                        required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="adminSavedUsername">Admin Username</label>
+                                    <input id="adminSavedUsername" type="text" placeholder="Enter admin username"
+                                        required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="adminSavedPassword">Admin Password</label>
+                                    <div class="password-input-wrap">
+                                        <input id="adminSavedPassword" type="password"
+                                            placeholder="Enter admin password" required />
+                                        <button type="button" class="toggle-password-btn"
+                                            data-target="adminSavedPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-block" id="saveAdminBtn" type="submit">Save Admin
+                                    Details</button>
+                            </form>
+
+                            <div class="saved-admin-list-wrap">
+                                <p class="panel-label">Saved Admins</p>
+                                <ul id="adminAccountList" class="saved-admin-list"></ul>
+                            </div>
+                        </div>
+
+                        <div class="admin-panel">
+                            <h3>Change Password</h3>
+                            <form id="adminPasswordForm" class="admin-form">
+                                <div class="input-group">
+                                    <label for="oldAdminPassword">Old Password</label>
+                                    <div class="password-input-wrap">
+                                        <input id="oldAdminPassword" type="password" placeholder="Enter old password"
+                                            required />
+                                        <button type="button" class="toggle-password-btn"
+                                            data-target="oldAdminPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="newAdminPassword">New Password</label>
+                                    <div class="password-input-wrap">
+                                        <input id="newAdminPassword" type="password" placeholder="Enter new password"
+                                            required />
+                                        <button type="button" class="toggle-password-btn"
+                                            data-target="newAdminPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="confirmAdminPassword">Confirm New Password</label>
+                                    <div class="password-input-wrap">
+                                        <input id="confirmAdminPassword" type="password"
+                                            placeholder="Confirm new password" required />
+                                        <button type="button" class="toggle-password-btn"
+                                            data-target="confirmAdminPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-block" type="submit">Update Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="admin-category">
+                    <div class="admin-category-heading">
+                        <p class="eyebrow small">Exam setup</p>
+                        <h3>Exam Management</h3>
+                    </div>
+                    <div class="admin-actions admin-actions-single">
+                        <div class="admin-panel">
+                            <h3>Upload Exam</h3>
+                            <form id="examUploadForm" class="admin-form">
+                                <div class="input-group">
+                                    <label for="examTitleInput">Exam Title</label>
+                                    <input id="examTitleInput" type="text" placeholder="Exam title" required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="examTypeInput">Exam Type</label>
+                                    <input id="examTypeInput" type="text" placeholder="e.g. JavaScript" required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="examDateInput">Date</label>
+                                    <input id="examDateInput" type="date" required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="examFileInput">Upload File</label>
+                                    <input id="examFileInput" type="file" accept=".pdf,.doc,.docx,.txt,.json" />
+                                </div>
+
+                                <button class="btn btn-primary btn-block" type="submit">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="upload-list-wrap">
+                        <h3>Uploaded Exams</h3>
+                        <ul id="examUploadList" class="upload-list"></ul>
+                    </div>
+                </section>
+            </section>
+
+            <section class="admin-slide hidden" id="studentDetailsSlide" role="tabpanel"
+                aria-labelledby="studentDetailsTab" hidden>
+                <section class="admin-category">
+                    <div class="admin-category-heading">
+                        <p class="eyebrow small">Student records</p>
+                        <h3>Student Details</h3>
+                    </div>
+                    <div class="admin-actions">
+                        <div class="admin-panel">
+                            <h3>Add / Edit Student</h3>
+                            <form id="studentForm" class="admin-form">
+                                <input type="hidden" id="studentEditId" value="" />
+
+                                <div class="input-group">
+                                    <label for="studentEntryName">Student Name</label>
+                                    <input id="studentEntryName" type="text" placeholder="Student name" required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="studentEntryHallTicket">Hall Ticket Number</label>
+                                    <input id="studentEntryHallTicket" type="text" placeholder="Hall ticket number"
+                                        required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="studentEntryBranch">Branch</label>
+                                    <input id="studentEntryBranch" type="text" placeholder="Branch" required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="studentEntryCollege">College</label>
+                                    <input id="studentEntryCollege" type="text" placeholder="College" required />
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="studentEntryPassword">Student Password</label>
+                                    <div class="password-input-wrap">
+                                        <input id="studentEntryPassword" type="password" placeholder="Student password"
+                                            required />
+                                        <button type="button" class="toggle-password-btn"
+                                            data-target="studentEntryPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="studentEntryScore">Result Score</label>
+                                    <input id="studentEntryScore" type="number" min="0" max="100" placeholder="Score"
+                                        required />
+                                </div>
+
+                                <div class="form-actions-inline">
+                                    <button class="btn btn-primary btn-block" type="submit">Save Student</button>
+                                    <button class="btn btn-secondary btn-block" id="resetStudentFormBtn"
+                                        type="button">Reset
+                                        form</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <div class="table-toolbar">
+                            <label for="studentResultFilter">Filter by result</label>
+                            <select id="studentResultFilter" class="filter-select">
+                                <option value="all">All Students</option>
+                                <option value="passed">Passed</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Hall Ticket</th>
+                                    <th>Branch</th>
+                                    <th>College</th>
+                                    <th>Result</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
