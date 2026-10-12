@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ExamPro | Online Examination System</title>
+    <title>Student Dashboard | Online Examination System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -16,93 +16,145 @@
     <div class="bg-orb orb-1"></div>
     <div class="bg-orb orb-2"></div>
     <div class="auth-screen" id="authScreen">
+        <button class="theme-toggle auth-theme-toggle" id="authThemeToggleBtn" type="button"
+            aria-label="Switch to dark theme">
+            <span class="theme-toggle-icon">☾</span>
+            <span class="theme-toggle-text">Dark</span>
+        </button>
+        <section class="landing-hero" aria-labelledby="landingHeading">
+            <p class="eyebrow">TESTIFY PORTAL</p>
+            <h1 id="landingHeading">STUDENT LOGIN</h1>
+            <p class="landing-copy" id="landingCopy">Sign in to take your exams and keep track of your progress.</p>
+            <div class="landing-visual">
+                <canvas class="three-canvas" id="landingThreeCanvas" aria-hidden="true"></canvas>
+                <div class="landing-glass-card glass-card-top">
+                    <span class="glass-card-icon">✦</span>
+                    <span>
+                        <strong id="landingCardTitle">Take your exams</strong>
+                        <small id="landingCardCopy">A focused test experience</small>
+                    </span>
+                </div>
+                <div class="landing-glass-card glass-card-bottom">
+                    <span class="glass-score">A+</span>
+                    <span>
+                        <strong id="landingScoreTitle">Review your results</strong>
+                        <small id="landingScoreCopy">See how far you’ve come</small>
+                    </span>
+                </div>
+                <span class="landing-particle particle-a"></span>
+                <span class="landing-particle particle-b"></span>
+                <span class="landing-particle particle-c"></span>
+            </div>
+            <div class="landing-features">
+                <span><strong>01</strong> <span id="landingFeatureOne">My exams</span></span>
+                <span><strong>02</strong> <span id="landingFeatureTwo">Scores</span></span>
+                <span><strong>03</strong> <span id="landingFeatureThree">Progress</span></span>
+            </div>
+        </section>
         <div class="auth-card">
-            <p class="eyebrow">Access portal</p>
-            <h2>Login to Examination Portal</h2>
+            <p class="eyebrow">ACCESS TO</p>
+            <h2>Login Testify</h2>
 
             <div class="auth-toggle">
-                <button class="toggle-btn active" id="studentLoginTab" type="button">Student Login</button>
-                <button class="toggle-btn" id="adminLoginTab" type="button">Admin Login</button>
+                <button class="toggle-btn active" id="studentLoginTab" type="button" aria-pressed="true">Student
+                    Login</button>
+                <button class="toggle-btn" id="adminLoginTab" type="button" aria-pressed="false">Admin Login</button>
             </div>
 
             <form id="loginForm" class="login-form">
                 <div class="input-group">
                     <label for="studentNameInput">Student Name</label>
                     <input id="studentNameInput" name="studentName" type="text" placeholder="Enter full name"
+                        autocomplete="name" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="hallTicketInput">Hall Ticket Number</label>
+                    <input id="hallTicketInput" name="hallTicket" type="text" placeholder="Enter hall ticket number"
+                        autocomplete="username" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="branchInput">Branch</label>
+                    <input id="branchInput" name="branch" type="text" placeholder="Enter branch" autocomplete="off"
                         required />
                 </div>
 
                 <div class="input-group">
                     <label for="collegeNameInput">College Name</label>
                     <input id="collegeNameInput" name="collegeName" type="text" placeholder="Enter college name"
-                        required />
-                </div>
-
-                <div class="input-group">
-                    <label for="branchInput">Branch</label>
-                    <input id="branchInput" name="branch" type="text" placeholder="Enter branch" required />
-                </div>
-
-                <div class="input-group">
-                    <label for="hallTicketInput">Hall Ticket Number</label>
-                    <input id="hallTicketInput" name="hallTicket" type="text" placeholder="Enter hall ticket number"
-                        required />
+                        autocomplete="organization" required />
                 </div>
 
                 <div class="input-group">
                     <label for="studentPasswordInput">Student Password</label>
                     <div class="password-input-wrap">
                         <input id="studentPasswordInput" name="studentPassword" type="password"
-                            placeholder="Enter student password" required />
-                        <button type="button" class="toggle-password-btn"
-                            data-target="studentPasswordInput">Show</button>
+                            placeholder="Enter student password" minlength="6" autocomplete="current-password"
+                            required />
+                        <button type="button" class="toggle-password-btn" data-target="studentPasswordInput"
+                            aria-label="Show student password" aria-pressed="false">Show</button>
                     </div>
+                    <button class="auth-link" id="forgotPasswordBtn" type="button">Forgot password?</button>
                 </div>
 
-                <button class="btn btn-primary btn-block" type="submit">Login as Student</button>
+                <p class="auth-feedback hidden" id="studentAuthFeedback" role="alert" aria-live="polite"></p>
+                <small class="auth-hint">New student? Enter your details to register. Existing students can log in with
+                    their hall ticket and password.</small>
+                <button class="btn btn-primary btn-block" type="submit">Continue as Student</button>
             </form>
 
             <form id="adminLoginForm" class="login-form hidden">
                 <div class="input-group">
-                    <label for="adminUsernameInput">Saved Admin Username</label>
-                    <input id="adminUsernameInput" name="adminUsername" type="text"
-                        placeholder="Enter saved admin username" required />
+                    <label for="adminUsernameInput">Admin Username</label>
+                    <input id="adminUsernameInput" name="adminUsername" type="text" placeholder="Enter admin username"
+                        autocomplete="username" required />
                 </div>
 
                 <div class="input-group">
                     <label for="adminPasswordInput">Admin Password</label>
                     <div class="password-input-wrap">
                         <input id="adminPasswordInput" name="adminPassword" type="password"
-                            placeholder="Enter admin password" required />
-                        <button type="button" class="toggle-password-btn" data-target="adminPasswordInput">Show</button>
+                            placeholder="Enter admin password" autocomplete="current-password" required />
+                        <button type="button" class="toggle-password-btn" data-target="adminPasswordInput"
+                            aria-label="Show admin password" aria-pressed="false">Show</button>
                     </div>
                 </div>
 
+                <p class="auth-feedback hidden" id="adminAuthFeedback" role="alert" aria-live="polite"></p>
                 <button class="btn btn-primary btn-block" type="submit">Login as Admin</button>
             </form>
+            <p class="auth-security-note">Demo mode: accounts and exam data are stored in this browser. Secure sign-in
+                and password recovery require a backend.</p>
         </div>
     </div>
 
     <div class="app-shell hidden" id="appShell">
         <header class="topbar">
             <div class="brand-wrap">
-                <div class="brand-mark">E</div>
+                <span class="brand-mark" aria-hidden="true"><span>T</span></span>
                 <div>
-                    <p class="eyebrow">Assessment portal</p>
-                    <h1>ExamPro</h1>
+                    <p class="brand-name">Testify</p>
+                    <h1>Student Dashboard</h1>
                 </div>
             </div>
 
-            <nav class="topnav" aria-label="Main navigation">
-                <button class="nav-link active" type="button">Dashboard</button>
-                <button class="nav-link" type="button">Exams</button>
-                <button class="nav-link" type="button">Results</button>
+            <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-label="Open navigation"
+                aria-controls="mainNavigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="topnav" id="mainNavigation" aria-label="Main navigation">
+                <button class="nav-link active" type="button" data-target="studentDashboardHome"
+                    aria-current="page">Dashboard</button>
+                <button class="nav-link" type="button" data-target="subjectPanel">Exams</button>
+                <button class="nav-link" type="button" data-target="recentResultsPanel">Results</button>
             </nav>
 
             <div class="user-panel">
                 <button class="theme-toggle" id="themeToggleBtn" type="button" aria-label="Toggle color theme">
-                    <span id="themeToggleIcon">☾</span>
-                    <span id="themeToggleText">Dark</span>
+                    <span class="theme-toggle-icon" id="themeToggleIcon">☾</span>
+                    <span class="theme-toggle-text" id="themeToggleText">Dark</span>
                 </button>
                 <div class="status-pill online">Online</div>
                 <div class="user-chip">
@@ -112,56 +164,82 @@
                         <strong id="studentName">Aisha Khan</strong>
                     </div>
                 </div>
+                <button class="btn btn-secondary student-logout-btn" id="studentLogoutBtn" type="button">Logout</button>
             </div>
         </header>
+        <button class="nav-backdrop hidden" id="navBackdrop" type="button" aria-label="Close navigation"></button>
 
         <main class="dashboard">
             <section class="main-column">
-                <div class="welcome-card">
-                    <div>
-                        <p class="eyebrow">Welcome back</p>
-                        <h2>Ready for your next assessment?</h2>
+                <div class="welcome-card student-depth-card" id="studentDashboardHome">
+                    <div class="welcome-content">
+                        <p class="eyebrow">Student dashboard <span class="welcome-date" id="dashboardDate"></span></p>
+                        <h2 id="dashboardGreeting">Welcome back!</h2>
+                        <p class="welcome-copy">Your learning progress, assessments, and results — all in one place.</p>
                     </div>
                     <button class="btn btn-primary" id="startExamBtn" type="button">Start Exam</button>
                 </div>
 
                 <div class="stats-grid">
-                    <div class="stat-card accent-blue">
-                        <span>Tests taken</span>
-                        <strong>12</strong>
-                        <small>+3 this month</small>
+                    <div class="stat-card student-depth-card accent-blue">
+                        <span>Exams completed</span>
+                        <strong id="testsTakenStat">0</strong>
+                        <small>Your completed attempts</small>
                     </div>
-                    <div class="stat-card accent-purple">
+                    <div class="stat-card student-depth-card accent-purple">
                         <span>Average score</span>
-                        <strong>86%</strong>
-                        <small>Excellent</small>
+                        <strong id="averageScoreStat">—</strong>
+                        <small>Across all your attempts</small>
                     </div>
-                    <div class="stat-card accent-green">
-                        <span>Streak</span>
-                        <strong>08 days</strong>
-                        <small>Keep it up</small>
+                    <div class="stat-card student-depth-card accent-green">
+                        <span>Latest score</span>
+                        <strong id="latestScoreStat">—</strong>
+                        <small>Your most recent result</small>
                     </div>
-                    <div class="stat-card accent-gold">
-                        <span>Next exam</span>
-                        <strong>Today</strong>
-                        <small>2:00 PM</small>
+                    <div class="stat-card student-depth-card accent-gold">
+                        <span>Available exams</span>
+                        <strong id="availableExamsStat">0</strong>
+                        <small>Choose one to get started</small>
                     </div>
                 </div>
 
-                <div class="subject-panel">
+                <section class="panel upcoming-panel" aria-labelledby="upcomingHeading">
                     <div class="section-heading">
                         <div>
-                            <p class="eyebrow">Choose your test</p>
+                            <p class="eyebrow">On your schedule</p>
+                            <h3 id="upcomingHeading">Upcoming examinations</h3>
+                        </div>
+                    </div>
+                    <ul class="upcoming-list" id="upcomingExamList" aria-live="polite"></ul>
+                </section>
+
+                <div class="subject-panel" id="subjectPanel">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Keep learning</p>
                             <h3>Available assessments</h3>
+                            <p class="section-copy">Select an assessment to review its details and begin.</p>
                         </div>
                     </div>
 
                     <div class="subject-grid" id="subjectGrid"></div>
                 </div>
+
+                <section class="panel results-panel student-depth-card" id="recentResultsPanel"
+                    aria-labelledby="resultsHeading">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">Your progress</p>
+                            <h3 id="resultsHeading">Recent results</h3>
+                            <p class="section-copy">A record of your completed assessments.</p>
+                        </div>
+                    </div>
+                    <ul class="results-list" id="studentResultsList" aria-live="polite"></ul>
+                </section>
             </section>
 
             <aside class="side-column">
-                <div class="panel profile-panel">
+                <div class="panel profile-panel student-depth-card">
                     <div class="panel-head">
                         <p class="panel-label">Student profile</p>
                     </div>
@@ -184,62 +262,34 @@
                     </div>
                 </div>
 
-                <div class="panel student-password-panel">
-                    <p class="panel-label">Account security</p>
-                    <h3>Change Password</h3>
-                    <form id="studentPasswordForm" class="admin-form">
-                        <div class="input-group">
-                            <label for="studentOldPassword">Old Password</label>
-                            <div class="password-input-wrap">
-                                <input id="studentOldPassword" type="password" placeholder="Enter old password"
-                                    autocomplete="current-password" required />
-                                <button type="button" class="toggle-password-btn"
-                                    data-target="studentOldPassword">Show</button>
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="studentNewPassword">New Password</label>
-                            <div class="password-input-wrap">
-                                <input id="studentNewPassword" type="password" placeholder="Enter new password"
-                                    autocomplete="new-password" required />
-                                <button type="button" class="toggle-password-btn"
-                                    data-target="studentNewPassword">Show</button>
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="studentConfirmPassword">Confirm New Password</label>
-                            <div class="password-input-wrap">
-                                <input id="studentConfirmPassword" type="password" placeholder="Confirm new password"
-                                    autocomplete="new-password" required />
-                                <button type="button" class="toggle-password-btn"
-                                    data-target="studentConfirmPassword">Show</button>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary btn-block" type="submit">Update Password</button>
-                    </form>
+                <div class="panel student-result-score-panel student-depth-card">
+                    <p class="panel-label">Academic result</p>
+                    <h3>Result Score</h3>
+                    <strong class="student-result-score" id="studentResultScore">—</strong>
+                    <p class="section-copy">Score set by your administrator</p>
                 </div>
 
-                <div class="panel leaderboard-panel">
-                    <p class="panel-label">Leaderboard</p>
+                <div class="panel leaderboard-panel student-depth-card">
+                    <div class="leaderboard-heading">
+                        <p class="panel-label">Leaderboard</p>
+                        <span class="leaderboard-count" id="leaderboardStudentCount">0 students</span>
+                    </div>
                     <ul class="leaderboard-list" id="leaderboardList"></ul>
                 </div>
 
-                <div class="panel exam-overview">
+                <div class="panel exam-overview student-depth-card">
                     <p class="panel-label">Exam overview</p>
                     <div class="overview-item">
                         <span>Selected test</span>
-                        <strong id="selectedSubject">Web Development</strong>
+                        <strong id="selectedSubject">JavaScript Fundamentals</strong>
                     </div>
                     <div class="overview-item">
                         <span>Duration</span>
-                        <strong>15 min</strong>
+                        <strong id="overviewDuration">20 min</strong>
                     </div>
                     <div class="overview-item">
                         <span>Difficulty</span>
-                        <strong>Intermediate</strong>
+                        <strong id="overviewDifficulty">Core</strong>
                     </div>
                     <div class="overview-item">
                         <span>Questions</span>
@@ -249,30 +299,48 @@
             </aside>
         </main>
 
-        <section class="exam-panel" id="examPanel">
+        <section class="exam-panel hidden" id="examPanel">
             <div class="exam-header">
                 <div>
-                    <p class="eyebrow small" id="examCategory">Web Development</p>
-                    <h2>Online Examination</h2>
+                    <p class="eyebrow small" id="examCategory">JavaScript Fundamentals</p>
+                    <h2>Assessment</h2>
                 </div>
                 <div class="header-right">
                     <span class="badge">Live Test</span>
                     <div class="meta-box timer-box">
                         <span>Time left</span>
-                        <strong id="timer">15:00</strong>
+                        <strong id="timer">10:00</strong>
                     </div>
                 </div>
             </div>
 
             <div class="exam-content">
                 <div class="question-card">
-                    <div class="question-topbar">
-                        <span class="question-number" id="questionNumber">Question 1</span>
-                        <span class="question-points" id="questionPoints">5 points</span>
-                    </div>
+                    <div id="singleQuestionView">
+                        <div class="question-topbar">
+                            <span class="question-number" id="questionNumber">Question 1</span>
+                            <span class="question-points" id="questionPoints">5 points</span>
+                            <button class="small-btn review-toggle" id="reviewToggleBtn" type="button"
+                                aria-pressed="false">Mark for review</button>
+                        </div>
 
-                    <h3 id="questionText">Question text here</h3>
-                    <div class="options" id="optionsContainer"></div>
+                        <h3 id="questionText">Question text here</h3>
+                        <div class="coding-problem-details hidden" id="codingProblemDetails"></div>
+                        <div class="options" id="optionsContainer"></div>
+                        <div class="code-answer hidden" id="codeAnswerPanel">
+                            <label for="codeLanguageSelect">Programming language</label>
+                            <select id="codeLanguageSelect" class="filter-select"></select>
+                            <label for="codeAnswerInput">Your solution</label>
+                            <textarea id="codeAnswerInput" rows="14" spellcheck="false"
+                                autocomplete="off" autocapitalize="off"></textarea>
+                            <small>Code execution is not enabled yet. Your solution will be saved for review.</small>
+                        </div>
+                    </div>
+                    <div class="mcq-exam-view hidden" id="mcqExamView"></div>
+                    <div class="mcq-submit-row hidden" id="mcqSubmitRow">
+                        <p>Review your answers, then submit your assessment.</p>
+                        <button class="btn btn-submit" id="submitMcqsBtn" type="button">Submit MCQs</button>
+                    </div>
                 </div>
 
                 <aside class="summary-panel">
@@ -290,6 +358,10 @@
                             <span>Remaining</span>
                             <strong id="remainingCount">0</strong>
                         </div>
+                        <div class="summary-row">
+                            <span>Review later</span>
+                            <strong id="reviewCount">0</strong>
+                        </div>
                         <div class="progress-wrap">
                             <div class="progress-bar">
                                 <span id="progressFill"></span>
@@ -301,6 +373,11 @@
                     <div class="panel nav-panel">
                         <p class="panel-label">Question Navigator</p>
                         <div class="nav-grid" id="questionNavigator"></div>
+                        <div class="question-legend" aria-label="Question status key">
+                            <span><i class="legend-dot answered-dot"></i>Answered</span>
+                            <span><i class="legend-dot review-dot"></i>Review</span>
+                            <span><i class="legend-dot"></i>Unanswered</span>
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -316,14 +393,30 @@
     <div class="result-modal hidden" id="resultModal" aria-live="polite">
         <div class="result-card">
             <div class="result-icon">✓</div>
-            <h3>Exam Submitted</h3>
+            <h3 id="resultHeading">Exam Submitted</h3>
             <p id="resultMessage">Your result is ready.</p>
+            <p class="pending-review-note hidden" id="pendingReviewNote">
+                Coding problems are not auto-graded yet. Submitted source code is saved for manual review.
+            </p>
             <div class="score-box">
-                <span>Score</span>
+                <span id="resultScoreLabel">Score</span>
                 <strong id="finalScore">0/0</strong>
             </div>
             <div class="grade-box" id="gradeBox">Grade: --</div>
-            <button class="btn btn-primary" id="restartBtn" type="button">Try Again</button>
+            <div class="result-breakdown">
+                <div><span>Correct</span><strong id="correctAnswersCount">0</strong></div>
+                <div><span>Incorrect</span><strong id="incorrectAnswersCount">0</strong></div>
+                <div><span>Unanswered</span><strong id="unansweredAnswersCount">0</strong></div>
+            </div>
+            <p class="result-feedback" id="resultFeedback"></p>
+            <details class="answer-review" id="answerReview">
+                <summary>Review answers</summary>
+                <ol class="answer-review-list" id="answerReviewList"></ol>
+            </details>
+            <div class="result-actions">
+                <button class="btn btn-secondary" id="closeResultBtn" type="button">Back to dashboard</button>
+                <button class="btn btn-primary" id="restartBtn" type="button">Try Again</button>
+            </div>
         </div>
     </div>
 
@@ -332,9 +425,14 @@
             <div class="admin-header">
                 <div>
                     <p class="eyebrow">Control center</p>
-                    <h2>Admin Dashboard</h2>
+                    <h2>ADMIN DASHBOARD</h2>
                 </div>
                 <div class="admin-header-actions">
+                    <button class="theme-toggle" id="adminThemeToggleBtn" type="button"
+                        aria-label="Toggle color theme">
+                        <span class="theme-toggle-icon">☾</span>
+                        <span class="theme-toggle-text">Dark</span>
+                    </button>
                     <div class="admin-user-badge">
                         <span>Admin:</span>
                         <strong id="adminUserNameLabel">Admin</strong>
@@ -452,12 +550,30 @@
 
                 <section class="admin-category">
                     <div class="admin-category-heading">
-                        <p class="eyebrow small">Exam setup</p>
+                        <p class="eyebrow small">Plan, schedule, and track</p>
                         <h3>Exam Management</h3>
+                    </div>
+                    <div class="exam-management-stats" aria-label="Examination summary">
+                        <div class="exam-management-stat">
+                            <span>Total examinations</span>
+                            <strong id="managedExamTotal">0</strong>
+                        </div>
+                        <div class="exam-management-stat">
+                            <span>Upcoming</span>
+                            <strong id="managedExamUpcoming">0</strong>
+                        </div>
+                        <div class="exam-management-stat">
+                            <span>Available now</span>
+                            <strong id="managedExamAvailable">0</strong>
+                        </div>
+                        <div class="exam-management-stat">
+                            <span>Closed</span>
+                            <strong id="managedExamClosed">0</strong>
+                        </div>
                     </div>
                     <div class="admin-actions admin-actions-single">
                         <div class="admin-panel">
-                            <h3>Upload Exam</h3>
+                            <h3>Create and schedule an exam</h3>
                             <form id="examUploadForm" class="admin-form">
                                 <div class="input-group">
                                     <label for="examTitleInput">Exam Title</label>
@@ -465,28 +581,194 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="examTypeInput">Exam Type</label>
+                                    <label for="examTypeInput">Subject</label>
                                     <input id="examTypeInput" type="text" placeholder="e.g. JavaScript" required />
                                 </div>
 
-                                <div class="input-group">
-                                    <label for="examDateInput">Date</label>
-                                    <input id="examDateInput" type="date" required />
+                                <div class="schedule-selection-grid" aria-label="Schedule examination">
+                                    <section class="schedule-selection-card schedule-date-card">
+                                        <div class="schedule-card-heading">
+                                            <div>
+                                                <h4>Scheduled date and time</h4>
+                                                <p id="scheduledDatePreview" aria-live="polite">Choose a date and start time</p>
+                                            </div>
+                                            <span class="schedule-theme-icon calendar-theme-icon" aria-hidden="true">
+                                                <svg viewBox="0 0 48 48" fill="none">
+                                                    <rect x="7" y="11" width="34" height="30" rx="7" />
+                                                    <path d="M15 6v10M33 6v10M7 20h34" />
+                                                    <path class="icon-spark" d="M17 27h.1M24 27h.1M31 27h.1M17 34h.1M24 34h.1" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="interactive-calendar" id="interactiveCalendar">
+                                            <div class="calendar-toolbar">
+                                                <button class="calendar-month-nav" id="calendarPreviousMonth" type="button"
+                                                    aria-label="Previous month">‹</button>
+                                                <label class="visually-hidden" for="calendarMonthSelect">Month</label>
+                                                <select id="calendarMonthSelect" aria-label="Select month"></select>
+                                                <label class="visually-hidden" for="calendarYearSelect">Year</label>
+                                                <select id="calendarYearSelect" aria-label="Select year"></select>
+                                                <button class="calendar-month-nav" id="calendarNextMonth" type="button"
+                                                    aria-label="Next month">›</button>
+                                            </div>
+                                            <div class="calendar-weekdays" aria-hidden="true">
+                                                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+                                                <span>Thu</span><span>Fri</span><span>Sat</span>
+                                            </div>
+                                            <div class="calendar-days" id="calendarDays" role="group"
+                                                aria-label="Choose examination date"></div>
+                                            <input id="examDateInput" type="date" hidden />
+                                        </div>
+                                    </section>
+
+                                    <section class="schedule-selection-card schedule-time-card">
+                                        <div class="schedule-card-heading">
+                                            <div>
+                                                <h4>Start time</h4>
+                                                <p>Choose when the exam begins</p>
+                                            </div>
+                                            <span class="schedule-theme-icon time-theme-icon" aria-hidden="true">
+                                                <svg viewBox="0 0 48 48" fill="none">
+                                                    <circle cx="24" cy="26" r="17" />
+                                                    <path d="M24 16v11l8 5M18 5h12M24 5v4" />
+                                                    <path class="icon-spark" d="M37 11l3-3M11 11 8 8" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="input-group calendar-time-group">
+                                            <label class="visually-hidden" for="examTimeInput">Start time</label>
+                                            <div class="time-presets" role="group" aria-label="Common examination start times">
+                                                <button type="button" class="time-preset" data-time="09:00" aria-pressed="false">9:00 AM</button>
+                                                <button type="button" class="time-preset" data-time="10:00" aria-pressed="false">10:00 AM</button>
+                                                <button type="button" class="time-preset" data-time="13:00" aria-pressed="false">1:00 PM</button>
+                                                <button type="button" class="time-preset" data-time="14:00" aria-pressed="false">2:00 PM</button>
+                                                <button type="button" class="time-preset" data-time="custom" aria-pressed="false">Custom</button>
+                                            </div>
+                                            <input id="examTimeInput" type="time" required />
+                                        </div>
+                                    </section>
+
+                                    <section class="schedule-selection-card schedule-duration-card">
+                                        <div class="schedule-card-heading">
+                                            <div>
+                                                <h4>Duration</h4>
+                                                <p>Choose a preset or set a custom length</p>
+                                            </div>
+                                            <span class="schedule-theme-icon duration-theme-icon" aria-hidden="true">
+                                                <svg viewBox="0 0 48 48" fill="none">
+                                                    <circle cx="24" cy="26" r="17" />
+                                                    <path d="M24 16v11l8 5M18 5h12M24 5v4" />
+                                                    <path class="icon-spark" d="M37 11l3-3M11 11 8 8" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="duration-presets" role="group" aria-label="Common exam durations">
+                                            <button type="button" class="duration-preset" data-duration="30" aria-pressed="true">30 min</button>
+                                            <button type="button" class="duration-preset" data-duration="45" aria-pressed="false">45 min</button>
+                                            <button type="button" class="duration-preset" data-duration="60" aria-pressed="false">60 min</button>
+                                            <button type="button" class="duration-preset" data-duration="90" aria-pressed="false">90 min</button>
+                                            <button type="button" class="duration-preset duration-custom-preset" data-duration="custom" aria-pressed="false">Custom</button>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="examDurationInput">Custom duration in minutes (1–300)</label>
+                                            <input id="examDurationInput" type="number" min="1" max="300" value="30" required />
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="input-group document-import-group">
+                                    <label for="questionDocumentInput">Upload question document</label>
+                                    <input id="questionDocumentInput" type="file"
+                                        accept=".json,.pdf,.docx,application/json,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                                    <small>Import a JSON question bank, or a structured PDF/Word (.docx) question document. Files are read in this browser and are not uploaded to a server. Scanned PDFs need OCR and are not supported.</small>
+                                    <p class="document-import-status" id="documentImportStatus" role="status" aria-live="polite"></p>
+                                    <details class="document-format-help">
+                                        <summary>View the supported document format</summary>
+                                        <pre>Question 1 [coding]
+Question: Find the sum of the numbers.
+Input Format: First line is n; second line contains n integers.
+Output Format: Print their sum.
+Constraints: 1 &lt;= n &lt;= 1000
+Languages: Python, Java, C, C++, HTML, CSS, JavaScript
+Sample Input: 3
+2 4 6
+Sample Output: 12
+Explanation: 2 + 4 + 6 equals 12.
+Points: 10
+
+Question 2 [mcq]
+Question: Which data structure uses FIFO order?
+A: Queue
+B: Stack
+C: Tree
+D: Graph
+Correct Answer: A
+Points: 2</pre>
+                                    </details>
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="examFileInput">Upload File</label>
-                                    <input id="examFileInput" type="file" accept=".pdf,.doc,.docx,.txt,.json" />
+                                    <label for="examQuestionsInput">Subject Question Bank (JSON)</label>
+                                    <textarea id="examQuestionsInput" rows="14" required
+                                        aria-describedby="examQuestionsHelp"
+                                        placeholder='[{"type":"coding","question":"Given an array of integers, find the maximum value.","inputFormat":"The first line contains n, followed by n integers.","outputFormat":"Print the maximum integer.","constraints":"1 <= n <= 100000","testCases":[{"input":"5\n1 7 3 9 2","output":"9","explanation":"9 is the largest value in the array."}],"languages":["Python","Java","C","C++","HTML","CSS","JavaScript"],"starterCode":{"Python":"def solve():\n    pass"},"points":10},{"type":"mcq","question":"Which answer is correct?","options":["A","B","C","D"],"correctAnswer":0,"points":2}]'></textarea>
+                                    <small id="examQuestionsHelp">Add at least 6 coding problems and 4 MCQs.
+                                        Each attempt randomly selects 6 coding problems and 4 MCQs from this
+                                        subject bank. Each coding problem needs supported languages, points, input/output
+                                        formats, and at least one sample test case with input, output, and explanation.
+                                        MCQs need four options, a correctAnswer index from 0 to 3, and points.</small>
                                 </div>
 
-                                <button class="btn btn-primary btn-block" type="submit">Upload</button>
+                                <button class="btn btn-primary btn-block" type="submit">Schedule Examination</button>
                             </form>
                         </div>
                     </div>
 
                     <div class="upload-list-wrap">
-                        <h3>Uploaded Exams</h3>
+                        <div class="exam-list-heading">
+                            <div>
+                                <p class="eyebrow small">Question banks and schedules</p>
+                                <h3>Manage examinations</h3>
+                            </div>
+                            <div class="exam-list-filters">
+                                <label class="visually-hidden" for="examSearchInput">Search examinations</label>
+                                <input id="examSearchInput" type="search" placeholder="Search title or subject" />
+                                <label class="visually-hidden" for="examStatusFilter">Filter by status</label>
+                                <select id="examStatusFilter">
+                                    <option value="all">All statuses</option>
+                                    <option value="upcoming">Upcoming</option>
+                                    <option value="available">Available now</option>
+                                    <option value="expired">Closed</option>
+                                </select>
+                            </div>
+                        </div>
                         <ul id="examUploadList" class="upload-list"></ul>
+                    </div>
+                </section>
+
+                <section class="admin-category" aria-labelledby="adminResultsHeading">
+                    <div class="admin-category-heading">
+                        <p class="eyebrow small">Assessment outcomes</p>
+                        <h3 id="adminResultsHeading">Examination Results</h3>
+                        <p class="admin-result-student-count" id="adminResultStudentCount" aria-live="polite">
+                            0 total students · 0 participated
+                        </p>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Hall Ticket</th>
+                                    <th>Examination</th>
+                                    <th>Score</th>
+                                    <th>Grade</th>
+                                    <th>Completed</th>
+                                    <th>Answers</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminResultsBody"></tbody>
+                        </table>
                     </div>
                 </section>
             </section>
@@ -535,18 +817,57 @@
                                     </div>
                                 </div>
 
-                                <div class="input-group">
-                                    <label for="studentEntryScore">Result Score</label>
-                                    <input id="studentEntryScore" type="number" min="0" max="100" placeholder="Score"
-                                        required />
-                                </div>
-
                                 <div class="form-actions-inline">
                                     <button class="btn btn-primary btn-block" type="submit">Save Student</button>
                                     <button class="btn btn-secondary btn-block" id="resetStudentFormBtn"
                                         type="button">Reset
                                         form</button>
                                 </div>
+                            </form>
+                        </div>
+                        <div class="admin-panel">
+                            <h3>Change Student Password</h3>
+                            <div class="input-group">
+                                <label for="adminPasswordStudentSelect">Student Account</label>
+                                <select id="adminPasswordStudentSelect" class="filter-select" required>
+                                    <option value="">Select a student</option>
+                                </select>
+                            </div>
+                            <form id="adminStudentPasswordForm" class="admin-form">
+                            <form id="adminStudentPasswordForm" class="admin-form">
+                                <div class="input-group">
+                                    <label for="adminStudentNewPassword">New Password</label>
+                                    <div class="password-input-wrap">
+                                        <input id="adminStudentNewPassword" type="password"
+                                            placeholder="Enter new password" minlength="6" autocomplete="new-password"
+                                            required />
+                                        <button type="button" class="toggle-password-btn"
+                                            data-target="adminStudentNewPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="adminStudentConfirmPassword">Confirm New Password</label>
+                                    <div class="password-input-wrap">
+                                        <input id="adminStudentConfirmPassword" type="password"
+                                            placeholder="Confirm new password" minlength="6" autocomplete="new-password"
+                                            required />
+                                        <button type="button" class="toggle-password-btn"
+                                            data-target="adminStudentConfirmPassword">Show</button>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-block" type="submit">Change Student Password</button>
+                            </form>
+
+                            <form id="adminStudentScoreForm" class="admin-form">
+                                <h4>Update Result Score</h4>
+                                <div class="input-group">
+                                    <label for="adminStudentScoreInput">Result Score (0–100)</label>
+                                    <input id="adminStudentScoreInput" type="number" min="0" max="100" step="any"
+                                        placeholder="Select a student first" required disabled />
+                                </div>
+                                <button class="btn btn-secondary btn-block" type="submit" disabled>Save Result Score</button>
                             </form>
                         </div>
                     </div>
@@ -580,7 +901,13 @@
         </div>
     </section>
 
+    <div class="app-scene-backdrop" aria-hidden="true">
+        <canvas id="appThreeCanvas" class="app-three-canvas"></canvas>
+    </div>
+
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+    <script src="three-scene.js"></script>
 </body>
 
 </html>
